@@ -148,18 +148,16 @@
 			$(function () {
 				$("#example1").DataTable({
 					// "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
-					"paging": true,
-					"lengthChange": true,
-					"searching": true,
+					"paging": false,
+					"lengthChange": false,
+					"searching": false,
 					"ordering": true,
-					"info": true,
+					"info": false,
 					"autoWidth": false,
 					"responsive": true,
-					"order": [
-						[1, 'asc']
-					],
+					"order":false,
 					"columnDefs": [{
-						"targets": [0],
+						"targets": [0,1,2],
 						"orderable": false
 					}, {
 						"visible": true,

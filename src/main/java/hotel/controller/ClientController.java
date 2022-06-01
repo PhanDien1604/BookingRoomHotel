@@ -1,6 +1,7 @@
 package hotel.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -13,8 +14,10 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import hotel.model.Booking;
 import hotel.model.Client;
 import hotel.repository.ClientRepository;
 
@@ -33,7 +36,16 @@ public class ClientController {
 		model.addAttribute("clients", clients);
 		return "admin/client";
 	}
-
+	@GetMapping("/admin/client/infor-client")
+	public String inforClient(@RequestParam Long id,Model model, HttpSession session) {
+		if (session.getAttribute("user") == null) {
+			return "redirect:/admin/login";
+		}
+		Optional<Client> client = clientRepo.findById(id);
+		List<Booking> bookings = client.get().getBookings();
+		model.addAttribute("bookings", bookings);
+		return "admin/inforClient";
+	}
 //	home
 	@GetMapping("/login")
 	public String login(Model model, Client client) {

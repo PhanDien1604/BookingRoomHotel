@@ -1,91 +1,98 @@
-<html xmlns="http://www.w3.org/1999/xhtml"
-  xmlns:th="http://www.thymeleaf.org"  
-  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="~{layouts/admin}">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/admin}">
+
 <head>
-	
+
 </head>
+
 <body>
-	
+
 	<section layout:fragment="content">
 		<div class="content-wrapper">
-        <section class="content-header">
-            <div c lass="container-fluid">
-                <div class="row mb-2">
-                    <div class="col-sm-6">
-                        <h1>Danh sách Khách hàng</h1>
+			<section class="content-header">
+				<div c lass="container-fluid">
+					<div class="row mb-2">
+						<div class="col-sm-6">
+							<h1>Danh sách Khách hàng</h1>
 
-                    </div>
-                </div>
-            </div>
-            <!-- /.container-fluid -->
-        </section>
-        <section class="content">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-12">
-                    	<div class="card">
-                        <div class="card-header">
-                        	
-                        </div>
-                        <div class="card-body row">
-                            <div class="col-12">
-                                <table id="example1" class="table table-bordered table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>STT</th>
-                                            <th>Họ và tên</th>
-                                            <th>Địa chỉ</th>
-                                            <th>Số điện thoại</th>
-                                            <th>Email</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr th:each="client: ${clients}">
-                                            <td></td>
-                                            <td th:text="${client.name}"></td>
-                                            <td th:text="${client.address}"></td>
-                                            <td th:text="${client.tel}"></td>
-                                            <td th:text="${client.email}"></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    	</div>
-                    </div>	
-                </div>
-            </div>
-        </section>
-    	</div>
+						</div>
+					</div>
+				</div>
+				<!-- /.container-fluid -->
+			</section>
+			<section class="content">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-12">
+							<div class="card">
+								<div class="card-header">
+
+								</div>
+								<div class="card-body row">
+									<div class="col-12">
+										<table id="example1" class="table table-bordered table-hover">
+											<thead>
+												<tr>
+													<th>STT</th>
+													<th>Họ và tên</th>
+													<th>Địa chỉ</th>
+													<th>Số điện thoại</th>
+													<th>Email</th>
+													<th>Xem</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr th:each="client: ${clients}">
+													<td></td>
+													<td th:text="${client.name}"></td>
+													<td th:text="${client.address}"></td>
+													<td th:text="${client.tel}"></td>
+													<td th:text="${client.email}"></td>
+													<td>
+														<div class="btn-box">
+															<a th:href="@{'/admin/client/infor-client?id='+${client.id}}" class="btn btn-info"><i class="fas fa-angle-double-right"></i></a>
+														</div>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
 	</section>
-	
+
 	<th:block layout:fragment="js">
-    <script>
-    	$('.client-link').addClass('active')
-        $(function() {			
-            $("#example1").DataTable({
-                // "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
-                "paging": true,
-                "lengthChange": true,
-                "searching": true,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false,
-                "responsive": true,
-                "order": [
-                    [1, 'asc']
-                ],
-                "columnDefs": [{
-                    "targets": [0, 4],
-                    "orderable": false
-                }, {
-                    "visible": true,
-                    "targets": 0
-                }],
-            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-        });
-    </script>
-    </th:block>
+		<script>
+			$('.client-link').addClass('active')
+			$(function () {
+				$("#example1").DataTable({
+					// "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
+					"paging": true,
+					"lengthChange": true,
+					"searching": true,
+					"ordering": true,
+					"info": true,
+					"autoWidth": false,
+					"responsive": true,
+					"order": [
+						[1, 'asc']
+					],
+					"columnDefs": [{
+						"targets": [0, 5],
+						"orderable": false
+					}, {
+						"visible": true,
+						"targets": 0
+					}],
+				}).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+			});
+		</script>
+	</th:block>
 </body>
+
 </html>
