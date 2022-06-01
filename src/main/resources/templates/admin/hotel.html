@@ -1,0 +1,124 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/admin}">
+
+<head>
+	<th:block layout:fragment="css">
+		<style>
+
+		</style>
+	</th:block>
+</head>
+
+<body>
+
+	<section layout:fragment="content">
+		<div class="content-wrapper">
+			<section class="content-header">
+				<div c lass="container-fluid">
+					<div class="row mb-2">
+						<div class="col-sm-6">
+							<h1>Danh sách khách sạn</h1>
+
+						</div>
+					</div>
+				</div>
+				<!-- /.container-fluid -->
+			</section>
+			<section class="content">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-12">
+							<div class="card">
+								<div class="card-header">
+									<div class="row">
+										<div class="col-3">
+											<div class="form-group">
+												<input disabled type="text" id="inputName" class="form-control"
+													th:value="${session.hotel.name}" name="hotel_name"
+													placeholder="Tên cơ sở">
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="card-body row">
+									<div class="col-12">
+										<table id="example1" class="table table-bordered table-hover">
+											<thead>
+												<tr>
+													<th>STT</th>
+													<th>Tên cơ sở</th>
+													<th>Địa chỉ</th>
+													<th>Chọn</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr th:each="hotel: ${hotels}">
+													<td></td>
+													<td th:text="${hotel.name}"></td>
+													<td th:text="${hotel.address}"></td>
+													<td>
+														<div class="btn-box">
+															<input type="hidden" th:value="${hotel.id}">
+															<button onclick="selectHotel(this)" class="btn btn-info"><i
+																	class="fas fa-angle-double-right"></i></button>
+														</div>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+									<!-- /.card -->
+								</div>
+								<!-- /.col -->
+							</div>
+						</div>
+						<!-- /.row -->
+					</div>
+				</div>
+			</section>
+		</div>
+	</section>
+
+	<th:block layout:fragment="js">
+		<script>
+			function selectHotel(e) {
+				var hotel_id = $(e).parent().find('input').val();
+				$.ajax({
+					type: "get",
+					url: "/api/select-hotel?id=" + hotel_id,
+					contentType: false,
+					success: function (responseBody) {
+						window.location.reload()
+					},
+				})
+			}
+			$(function () {
+
+				$("#example1").DataTable({
+					// "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
+					"paging": true,
+					"lengthChange": true,
+					"searching": true,
+					"ordering": true,
+					"info": true,
+					"autoWidth": false,
+					"responsive": true,
+					"order": [
+						[1, 'asc']
+					],
+					"columnDefs": [{
+						"targets": [0, 3],
+						"orderable": false
+					}, {
+						"visible": true,
+						"targets": 0
+					}],
+				}).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+			});
+
+			$('.hotel-link').addClass('active')
+		</script>
+	</th:block>
+</body>
+
+</html>

@@ -1,0 +1,72 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/client}">
+
+<head>
+</head>
+
+<body>
+
+	<section layout:fragment="content">
+		<div class="container">
+			<form th:action="@{/searchRoom}" method="post">
+				<div class="box-booking">
+					<div class="form-group">
+						<label for="inputName">Tên địa điểm cần đến</label>
+						<input type="text" class="form-control" th:field="${hotel.address}"
+							placeholder="Thành phố/Khu vực/Tên khách sạn">
+						<span th:if="${errorAddress}" th:text="${errorAddress}" style="color: red;"></span>
+					</div>
+					<div class="row">
+						<div class="col-4">
+							<div class="form-group">
+								<label>Ngày nhận phòng</label>
+								<div class="input-group date" id="beginDate" data-target-input="nearest">
+									<input type="text" th:field="${booking.beginDate}" class="form-control datetimepicker-input"
+										data-target="#beginDate" />
+									<div class="input-group-append" data-target="#beginDate"
+										data-toggle="datetimepicker">
+										<div class="input-group-text"><i class="fa fa-calendar"></i></div>
+									</div>
+								</div>
+							</div>
+
+
+						</div>
+						<div class="col-4">
+							<div class="form-group">
+								<label>Ngày trả phòng</label>
+								<div class="input-group date" id="endDate" data-target-input="nearest">
+									<input type="text" th:field="${booking.endDate}" class="form-control datetimepicker-input"
+										data-target="#endDate" />
+									<div class="input-group-append" data-target="#endDate"
+										data-toggle="datetimepicker">
+										<div class="input-group-text"><i class="fa fa-calendar"></i></div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-4">
+							<button class="btn btn-search"><i class="fas fa-search mr-2"></i>Tìm phòng trống</button>
+						</div>
+					</div>
+
+				</div>
+			</form>
+		</div>
+	</section>
+	<th:block layout:fragment="js">
+		<script>
+			//Date picker
+			$('#beginDate').datetimepicker({
+				format: 'L'
+			});
+			//Date and time picker
+			$('#endDate').datetimepicker({
+				format: 'L'
+			});
+		</script>
+
+	</th:block>
+</body>
+
+</html>

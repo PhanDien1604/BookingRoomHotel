@@ -1,0 +1,34 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/client}">
+
+<head>
+</head>
+
+<body>
+
+	<section layout:fragment="content">
+		<div class="container">
+			<div class="card box-infor_room">
+				<div class="card-header">
+					<a th:href="@{/list-room}" class="btn btn-secondary">Quay lại</a>
+					<a th:href="@{'/select-room?id='+${room.id}}" class="btn btn-primary float-right">Chọn</a>
+				</div>
+				<div class="card-body row">
+					<div class="col-4 mb-3" style="overflow: hidden;" th:each="image : ${images}">
+						<img th:src="${image.path}" style="height: 200px;"/>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</section>
+	<th:block layout:fragment="js">
+		<script>
+
+
+		</script>
+
+	</th:block>
+</body>
+
+</html>

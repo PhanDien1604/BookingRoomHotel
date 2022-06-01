@@ -1,0 +1,105 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"  
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/admin}">
+<head>
+	<th:block layout:fragment="css">
+		<link rel="stylesheet" th:href="@{/admin/AdminLTE/plugins/daterangepicker/daterangepicker.css}">
+	</th:block>
+</head>
+<body>
+	
+	<section layout:fragment="content">
+		<div class="content-wrapper">
+        <section class="content-header">
+            <div c lass="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Danh sách phòng</h1>
+
+                    </div>
+                </div>
+            </div>
+            <!-- /.container-fluid -->
+        </section>
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                    	<div class="card">
+                        <div class="card-header">
+                        	<div class="row">
+                        		<div class="col-3">
+                        			<div class="form-group">
+                              			<input disabled type="text" id="inputName" class="form-control" th:value="${session.hotel.name}" name="hotel_name" placeholder="Tên cơ sở">
+                            		</div>
+                        		</div>
+                        	</div>
+                        </div>
+                        <div class="card-body row">
+                            <div class="col-12">
+                                <table id="example1" class="table table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>STT</th>
+                                            <th>Số phòng</th>
+                                            <th>Loại phòng</th>
+                                            <th>Giá</th>
+                                            <th>Trạng thái</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="room : ${rooms}">
+                                            <td></td>
+                                            <td th:text="${room.name}"></td>
+                                            <td th:text="${room.type}"></td>
+                                            <td th:text="${room.price}"></td>
+                                            <td th:text="${room.status}"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /.card -->
+                        </div>
+                        <!-- /.col -->
+                    	</div>
+                    </div>	
+                    <!-- /.row -->
+                </div>
+            </div>
+        </section>
+    	</div>
+	</section>
+	
+	<th:block layout:fragment="js">
+	<script th:src="@{/admin/AdminLTE/plugins/daterangepicker/daterangepicker.js}"></script>
+    <script>
+    	$('.room-link').addClass('active')
+        $(function() {			
+            $("#example1").DataTable({
+                // "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
+                "paging": true,
+                "lengthChange": true,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+                "order": [
+                    [1, 'asc']
+                ],
+                "columnDefs": [{
+                    "targets": [0, 4],
+                    "orderable": false
+                }, {
+                    "visible": true,
+                    "targets": 0
+                }],
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        });
+        // DatePicker
+    	$('#reservation').daterangepicker()
+    </script>
+    </th:block>
+</body>
+</html>

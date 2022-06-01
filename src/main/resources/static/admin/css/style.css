@@ -1,0 +1,76 @@
+/* slidebar */
+
+.user-panel .img-user {
+    width: 2.1rem;
+    height: 2.1rem;
+    border-radius: 50%;
+    overflow: hidden;
+    padding: 0px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, .16), 0 3px 6px rgba(0, 0, 0, .23);
+}
+
+
+/* endslidebar */
+/* css-sweetAlert */
+
+.swal2-popup.swal2-toast .swal2-title {
+    margin: 0.5em 0.2em;
+    color: #6c757d;
+}
+
+
+/* end-css-sweetAlert */
+
+
+/* couterRowTable */
+
+.table {
+    counter-reset: rowNumber;
+}
+
+table tr:not(:first-child) {
+    counter-increment: rowNumber;
+}
+
+table tr td:first-child::before {
+    content: counter(rowNumber);
+}
+
+
+/* end-couterRowTable */
+/* dataTable */
+.table thead th,
+    .table td, .table th {
+        vertical-align: middle
+    }
+    .table th,table td {
+        text-align: center;
+    }
+    .table.dataTable>thead .sorting:before,
+    .table.dataTable>thead .sorting:after {
+        bottom: 50%;
+        transform: translateY(50%);
+    }
+    .table td:nth-last-child(2)>input {
+        display: block;
+        margin: auto;
+    }
+    .table td .btn-box {
+        display: flex;
+        justify-content: center;
+    }
+    .table td .btn-box>.btn {
+        margin: 0px 0.2rem;
+        padding: 0.2rem 0.5rem;
+    }
+    .table td .img-prd {
+        width: 30px;
+        height: 30px;
+        overflow: hidden;
+        display: block;
+        margin: auto;
+    }
+    .table td .img-prd>img {
+        width: 30px;
+    }
+/* end-dataTable */

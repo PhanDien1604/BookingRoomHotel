@@ -1,0 +1,105 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<title>MediaMart</title>
+	<!-- Custom Theme files -->
+	<link rel="stylesheet" th:href="@{/client/css/login.css}">
+	<!-- for-mobile-apps -->
+	<link href='//fonts.googleapis.com/css?family=Roboto+Condensed:400,700' rel='stylesheet' type='text/css'>
+	<style>
+		.header-main {
+			padding-top: 40px;
+		}
+		.box-fail {
+			top: 140px;
+		}
+	</style>
+</head>
+
+<body>
+	<!--header start here-->
+	<div class="loader">
+		<div class="loader-1">
+			<div class="loader-outter"></div>
+			<div class="loader-inner"></div>
+		</div>
+	</div>
+	<div class="header">
+		<div class="header-main">
+			<h1>Register</h1>
+			<div th:if="${fail}" class="box-fail">Tên tài khoản đã tồn tại</div>
+			<div class="header-bottom">
+				<div class="header-right w3agile">
+		
+					<div class="header-left-bottom agileinfo">
+						<form th:action="@{/register}" method="post" th:object="${client}">
+							<div class="form-input">
+								<input type="text" name="name" th:field="*{name}" placeholder="Full name" />
+								<div th:if="${errorName}"class="box-error">
+	                                <span th:text="${errorName}"><i class="fas fa-exclamation"></i></span>
+	                            </div>
+							</div>
+							<div class="form-input">
+								<input type="text" name="username" th:field="*{username}" placeholder="User name" />
+								<div th:unless="${errorName}" th:if="${errorUsername}"class="box-error">
+	                                <span th:text="${errorUsername}"><i class="fas fa-exclamation"></i></span>
+	                            </div>
+							</div>
+							<div class="form-input">
+								<input type="password" class="password" th:field="*{password}" name="password" placeholder="Password" />
+								<div th:unless="${errorName} or ${errorUsername}"
+									th:if="${errorPassword}"class="box-error">
+	                                <span th:text="${errorPassword}"><i class="fas fa-exclamation"></i></span>
+	                            </div>
+							</div>
+							<div class="form-input">
+								<input type="password" class="password_confirmation" name="password_confirmation" placeholder="Confirm password" />
+							</div>
+							<input type="submit" value="Register">
+						</form>
+						<div class="header-left-top">
+							<div class="sign-up">
+								<h2>or</h2>
+							</div>
+						</div>
+						<div class="header-social wthree">
+							<a href="#" class="face">
+								<h5>Facebook</h5>
+							</a>
+							<a href="#" class="twitt">
+								<h5>Twitter</h5>
+							</a>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<!--header end here-->
+	<div class="choose_rl">
+		<p>Bạn đã có tài khoản? <a th:href="@{'/login'}"> Đăng nhập </a></p>
+	</div>
+	<!--footer end here-->
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+	<script>
+		$(window).on("load", function () {
+			$('.loader').fadeOut(500);
+		})
+		$('input').attr('autocomplete', 'off')
+		$('input[type="submit"]').click(function(e) {
+			var password = $('.password').val()
+			var password_confirmation = $('.password_confirmation').val()
+			if(password != password_confirmation) {
+				e.preventDefault()
+				alert("Mật khẩu xác nhận không chính xác")
+			}
+		})
+	</script>
+
+</body>
+
+</html>

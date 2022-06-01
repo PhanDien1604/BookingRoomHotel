@@ -1,0 +1,27 @@
+<header th:fragment="header">
+	<nav class="header-main navbar navbar-expand navbar-light">
+		<div class="container">
+			<a class="navbar-brand" href="/">
+				<img th:src="@{/client/img/logo-hotel-3.png}" width="150px" class="d-inline-block align-top" alt="">
+			</a>
+			<ul class="navbar-nav ml-auto">
+				<div class="nav-item">
+					<a class="nav-link" th:href="@{'/login'}" th:unless="${session.client}">Account</span></a>
+					<div th:if="${session.client}" class="box-user dropdown">
+						<div class="box-img_user" type="button" id="dropdownMenuButton"
+							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<img th:src="@{/client/img/user.png}" alt="">
+						</div>
+						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+							<div class="dropdown-item disabled" th:text="${session.client.name}"></div>
+							<a class="dropdown-item" th:href="@{/profile}">Hồ sơ cá nhân</a>
+							<a class="dropdown-item" th:href="@{/list-booking}">Phiếu đặt</a>
+							<a class="dropdown-item" th:href="@{/login}">Đăng xuất</a>
+						</div>
+					</div>
+				</div>
+			</ul>
+		</div>
+
+	</nav>
+</header>

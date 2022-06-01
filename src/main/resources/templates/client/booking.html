@@ -1,0 +1,140 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/client}">
+
+<head>
+</head>
+
+<body>
+
+	<section layout:fragment="content">
+		<div class="container">
+			<div class="box-list_room">
+				<h3>Tên khách sạn</h3>
+				<div class="form-group mb-3">
+					<label></label>
+					<select class="form-control select2bs4 select_hotel" style="width: 100%;">
+						<div th:each="hotel: ${hotels}">
+							<option th:value="${hotel.id}" th:text="${hotel.name}"></option>
+						</div>
+
+					</select>
+				</div>
+				<table id="example1" class="table table-bordered table-hover" style="background-color: white;">
+					<thead>
+						<tr>
+							<th>STT</th>
+							<th>Ngày nhận phòng</th>
+							<th>Ngày trả phòng</th>
+							<th>Chức năng</th>
+						</tr>
+					</thead>
+					<tbody>
+						<!--API-Booking-->
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</section>
+	<th:block layout:fragment="js">
+		<script>
+			var hotel_id = $('.select_hotel').val();
+			$.ajax({
+				type: "get",
+				url: "/api/list-booking/" + hotel_id,
+				contentType: false,
+				success: function (responseBody) {
+					$("tbody tr").remove();
+					$.each(responseBody, function (key, value) {
+						var _html = "<tr>"
+						_html += "<td></td>"
+						_html += "<td class='dateformat'>" + value.beginDate + "</td>"
+						_html += "<td class-'dateformat'>" + value.endDate + "</td>"
+						_html += "<td><div class='btn-box'>"
+						_html += "<a href='/list-booking/room?id=" + value.id + "' class='btn btn-secondary'><i class='fas fa-eye'></i></a>"
+						_html += "<input type='hidden' value=" + value.id + ">"
+						_html += "<button class='btn btn-danger' onclick='deleteBooking(this)'><i class='fas fa-trash-alt'></i></button>"
+						_html += "</div></td>"
+						_html += "</tr>"
+						$("tbody").append(_html)
+					})
+				},
+			})
+			$('.select_hotel').change(function () {
+				var hotel_id = $('.select_hotel').val();
+				$.ajax({
+					type: "get",
+					url: "/api/list-booking/" + hotel_id,
+					contentType: false,
+					success: function (responseBody) {
+						$("tbody tr").remove();
+						$.each(responseBody, function (key, value) {
+							var _html = "<tr>"
+							_html += "<td></td>"
+							_html += "<td class='dateformat'>" + value.beginDate + "</td>"
+							_html += "<td class-'dateformat'>" + value.endDate + "</td>"
+							_html += "<td><div class='btn-box'>"
+							_html += "<a href='/list-booking/room?id=" + value.id + "' class='btn btn-secondary'><i class='fas fa-eye'></i></a>"
+							_html += "<input type='hidden' value=" + value.id + ">"
+							_html += "<button class='btn btn-danger' onclick='deleteBooking(this)'><i class='fas fa-trash-alt'></i></button>"
+							_html += "</div></td>"
+							_html += "</tr>"
+							$("tbody").append(_html)
+						})
+					},
+				})
+			})
+			function deleteBooking(e) {
+				if (confirm("Bạn có chắc muốn xóa phiếu đặt không?")) {
+					var booking_id = $(e).parent().find('input').val();
+					console.log(booking_id)
+					$.ajax({
+						type: "get",
+						url: "/api/delete-booking?id=" + booking_id,
+						contentType: false,
+						success: function (responseBody) {
+							window.location.reload()
+							alert("Xóa phiếu đặt thành công")
+						},
+					})
+				}
+
+			}
+			$('.select2').select2()
+			$('.select2bs4').select2({
+				theme: 'bootstrap4'
+			})
+			$(function () {
+				$("#example1").DataTable({
+					// "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
+					"paging": true,
+					"lengthChange": true,
+					"searching": true,
+					"ordering": true,
+					"info": true,
+					"autoWidth": false,
+					"responsive": true,
+					"order": [
+						[1, 'asc']
+					],
+					"columnDefs": [{
+						"targets": [0, 3],
+						"orderable": false
+					}, {
+						"visible": true,
+						"targets": 0
+					}],
+				}).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+			});
+			//Date picker
+			$('#reservationdate').datetimepicker({
+				format: 'L'
+			});
+			$('#reservationdate1').datetimepicker({
+				format: 'L'
+			});
+		</script>
+
+	</th:block>
+</body>
+
+</html>

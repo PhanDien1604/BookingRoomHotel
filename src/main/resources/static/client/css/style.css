@@ -1,0 +1,121 @@
+/* header */
+.header-main{
+	background-color: rgb(222, 78, 179, 0.9);
+}
+/* end-header */
+body {
+	background: url("../img/backgroud.jpg") no-repeat;
+	background-attachment:fixed;
+	background-position:center;
+	background-size:cover;
+	-webkit-background-size:cover;
+	-moz-background-size:cover;
+	-o-background-size:cover;
+	font-family: 'Raleway', sans-serif;
+}
+section {
+/*	background-color: rgb(222, 78, 179, 0.1);*/
+	width: 100%;
+	height: calc(100vh-200px);
+}
+
+.box-booking {
+	background-color: rgb(244, 244, 244, 0.5);
+	padding: 2rem;
+	width: 60%;
+	margin: 80px 80px;
+	border-radius: 0.4rem;
+}
+/*.form-control {
+	background-color: rgb(244, 244, 244);
+}*/
+.btn-search {
+	background-color: rgb(222, 78, 179, 0.9);
+	margin-top: 32px;
+	width: 100%;
+	color: white;
+}
+.btn-search:hover,
+.btn-search:active {
+	background-color: rgb(222, 50, 179);
+	color: white;
+}
+/* list-room*/
+.box-list_room {
+	background-color: rgb(244, 244, 244, 0.5);
+	padding: 1.5rem 2.5rem;
+	width:70%;
+	margin: 0 auto;
+	margin-top: 15px;
+	border-radius: 0.4rem;
+}
+/* end-box-list-room*/
+/* box-profile*/
+.box-profile {
+	background-color: rgb(244, 244, 244, 0.5);
+	padding: 1.5rem 2.5rem;
+	width: 50%;
+	margin: 0 auto;
+	margin-top: 15px;
+	border-radius: 0.4rem;
+}
+/* end-box-profile*/
+/* user */
+
+.box-user {
+    position: relative;
+}
+
+.box-img_user {
+    border-radius: 50%;
+    border: 2px solid white;
+    cursor: pointer;
+}
+
+.box-img_user img {
+    width: 30px;
+    height: 30px;
+}
+
+.box-user .dropdown-menu {
+    background-color:rgb(222, 78, 179, 0.9);
+    border-radius: 0.4rem;
+    border: 1px solid white;
+    box-shadow: 0 0.4rem 8px rgb(22, 22, 22);
+    transform: translate(-50px, 25px) !important;
+    text-align: center;
+    padding-bottom: 0;
+}
+
+.box-user .dropdown-menu::after {
+    content: "";
+    position: absolute;
+    border-bottom: 10px solid white;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    top: -10px;
+    left: 57px;
+}
+
+.box-user .dropdown-item {
+    display: block;
+    color: white;
+    font-size: 16px;
+}
+
+.box-user .dropdown-item:hover:not(.user-item:first-child) {
+    background-color: white;
+    color: rgb(222, 78, 179);
+}
+
+.box-user .dropdown-item:first-child {
+    border-radius: 0.4rem 0.4rem 0 0;
+}
+
+.box-user .dropdown-item:last-child {
+    border-top: 1px solid white;
+    border-radius: 0.4rem;
+} 
+
+
+/* end-user */
